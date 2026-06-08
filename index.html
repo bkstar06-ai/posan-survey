@@ -1454,7 +1454,9 @@ function showTab(tab) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('tab-' + tab).classList.add('active');
-  event.target.classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    if (b.getAttribute('onclick') === "showTab('" + tab + "')") b.classList.add('active');
+  });
   if (tab === 'admin') renderDashboard();
 }
 
@@ -1601,8 +1603,4 @@ function renderDashboard() {
   const roleNames = {student:'학생',parent:'학부모',teacher:'교직원'};
   document.getElementById('comments-list').innerHTML = comments.length === 0
     ? '<p style="color:var(--text-muted);font-size:0.9rem;">의견 없음</p>'
-    : comments.map(d => `<div style="border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:12px;"><div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:6px;">[${roleNames[d.role]||d.role}] ${new Date(d.timestamp).toLocaleString('ko-KR')} · 전체의견: ${d.overall==='agree'?'✅ 동의':'❌ 반대'}</div><div style="font-size:0.9rem;line-height:1.7;">${d.comments.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div></div>`).join('');
-}
-
-function clearData() {
-  if (confirm('모든
+    : comments.map(d => `<div style="border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:12px;"><div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:6px;">[${roleNames[d.role]||d.role}] ${new Date(d.timestamp).toLocaleString('ko-KR')} · 전체의견: ${d.overall==='agree'?'✅ 동의':'❌ 반대'}</div><div style="font-size:0.9rem;line-height:1.7;">${d.comment
