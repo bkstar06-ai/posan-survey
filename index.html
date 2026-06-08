@@ -646,9 +646,9 @@
     <div class="header-badge">2026 개정안</div>
   </div>
   <div class="tab-nav">
-    <button class="tab-btn active" onclick="showTab('survey')">📋 설문 참여</button>
-    <button class="tab-btn" onclick="showTab('fulltext')">📄 2026년 개정안 전문</button>
-    <button class="tab-btn" onclick="showTab('admin')">🔐 관리자 대시보드</button>
+    <button class="tab-btn active" data-tab="survey">📋 설문 참여</button>
+    <button class="tab-btn" data-tab="fulltext">📄 2026년 개정안 전문</button>
+    <button class="tab-btn" data-tab="admin">🔐 관리자 대시보드</button>
   </div>
 </header>
 
@@ -1453,12 +1453,21 @@ let selectedRole = '', overallOpinion = '';
 function showTab(tab) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('tab-' + tab).classList.add('active');
+  var target = document.getElementById('tab-' + tab);
+  if (target) target.classList.add('active');
   document.querySelectorAll('.tab-btn').forEach(b => {
-    if (b.getAttribute('onclick') === "showTab('" + tab + "')") b.classList.add('active');
+    if (b.getAttribute('data-tab') === tab) b.classList.add('active');
   });
   if (tab === 'admin') renderDashboard();
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.tab-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      showTab(this.getAttribute('data-tab'));
+    });
+  });
+});
 
 function selectRole(btn, role) {
   document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('selected'));
@@ -1603,4 +1612,15 @@ function renderDashboard() {
   const roleNames = {student:'학생',parent:'학부모',teacher:'교직원'};
   document.getElementById('comments-list').innerHTML = comments.length === 0
     ? '<p style="color:var(--text-muted);font-size:0.9rem;">의견 없음</p>'
-    : comments.map(d => `<div style="border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:12px;"><div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:6px;">[${roleNames[d.role]||d.role}] ${new Date(d.timestamp).toLocaleString('ko-KR')} · 전체의견: ${d.overall==='agree'?'✅ 동의':'❌ 반대'}</div><div style="font-size:0.9rem;line-height:1.7;">${d.comment
+    : comments.map(d => `<div style="border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:12px;"><div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:6px;">[${roleNames[d.role]||d.role}] ${new Date(d.timestamp).toLocaleString('ko-KR')} · 전체의견: ${d.overall==='agree'?'✅ 동의':'❌ 반대'}</div><div style="font-size:0.9rem;line-height:1.7;">${d.comments.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div></div>`).join('');
+}
+
+function clearData() {
+  if (confirm('모든 응답 데이터를 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.')) {
+    localStorage.removeItem(STORAGE_KEY); renderDashboard();
+  }
+}
+updateProgress();
+</script>
+</body>
+</html>
