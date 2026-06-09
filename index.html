@@ -645,10 +645,10 @@
     </div>
     <div class="header-badge">2026 개정안</div>
   </div>
-  <div class="tab-nav">
-    <button class="tab-btn active" id="btn-survey" type="button" onclick="showTab('survey');return false;">📋 설문 참여</button>
-    <button class="tab-btn" id="btn-fulltext" type="button" onclick="showTab('fulltext');return false;">📄 2026년 개정안 전문</button>
-    <button class="tab-btn" id="btn-admin" type="button" onclick="showTab('admin');return false;">🔐 관리자 대시보드</button>
+  <div class="tab-nav" id="tab-nav">
+    <button class="tab-btn active" id="btn-survey" type="button">📋 설문 참여</button>
+    <button class="tab-btn" id="btn-fulltext" type="button">📄 2026년 개정안 전문</button>
+    <button class="tab-btn" id="btn-admin" type="button">🔐 관리자 대시보드</button>
   </div>
 </header>
 
@@ -1449,6 +1449,18 @@
 </div>
 
 <script>
+window.onload = function() {
+  var nav = document.getElementById('tab-nav');
+  if (nav) {
+    nav.addEventListener('click', function(e) {
+      var btn = e.target;
+      if (!btn.classList.contains('tab-btn')) return;
+      var tab = btn.id.replace('btn-', '');
+      showTab(tab);
+    });
+  }
+};
+
 const ADMIN_PASSWORD = 'posan3628!';
 const STORAGE_KEY = 'posan_survey_responses';
 const ROW_IDS = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,42,43,44,45,46,47,49];
@@ -1612,6 +1624,4 @@ function renderDashboard() {
   document.getElementById('sec-comments-list').innerHTML = secHtml || '<p style=\"color:var(--text-muted);font-size:0.9rem;\">섹션별 서술형 의견 없음</p>';
   const comments = data.filter(d=>d.comments&&d.comments.trim());
   const roleNames = {student:'학생',parent:'학부모',teacher:'교직원'};
-  document.getElementById('comments-list').innerHTML = comments.length === 0
-    ? '<p style="color:var(--text-muted);font-size:0.9rem;">의견 없음</p>'
-    : comments.map(d => `<div style="border:1px solid var(--border);border-radius:8px;padding:14px;margin-bott
+  document.getElementById('comments-list').innerHTML = comments.length ===
