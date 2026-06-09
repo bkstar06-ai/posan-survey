@@ -646,9 +646,9 @@
     <div class="header-badge">2026 개정안</div>
   </div>
   <div class="tab-nav">
-    <button class="tab-btn active" id="btn-survey" onclick="showTab('survey');return false;">📋 설문 참여</button>
-    <button class="tab-btn" id="btn-fulltext" onclick="showTab('fulltext');return false;">📄 2026년 개정안 전문</button>
-    <button class="tab-btn" id="btn-admin" onclick="showTab('admin');return false;">🔐 관리자 대시보드</button>
+    <button class="tab-btn active" id="btn-survey" type="button" onclick="showTab('survey');return false;">📋 설문 참여</button>
+    <button class="tab-btn" id="btn-fulltext" type="button" onclick="showTab('fulltext');return false;">📄 2026년 개정안 전문</button>
+    <button class="tab-btn" id="btn-admin" type="button" onclick="showTab('admin');return false;">🔐 관리자 대시보드</button>
   </div>
 </header>
 
@@ -1614,4 +1614,4 @@ function renderDashboard() {
   const roleNames = {student:'학생',parent:'학부모',teacher:'교직원'};
   document.getElementById('comments-list').innerHTML = comments.length === 0
     ? '<p style="color:var(--text-muted);font-size:0.9rem;">의견 없음</p>'
-    : comments.map(d => `<div style="border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:12px;"><div style="font-size:0.8rem;col
+    : comments.map(d => `<div style="border:1px solid var(--border);border-radius:8px;padding:14px;margin-bott
