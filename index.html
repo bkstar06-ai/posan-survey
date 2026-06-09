@@ -1390,8 +1390,19 @@
 <div id="tab-fulltext" class="section">
   <div style="padding:16px; max-width:900px; margin:0 auto;">
     <h2 style="font-size:1.1rem; color:var(--primary); margin-bottom:12px;">📄 포산고등학교 학생생활규정 2026년 개정안 전문</h2>
-    <iframe src="https://docs.google.com/gview?url=https://bkstar06-ai.github.io/posan-survey/regulation.pdf&embedded=true" width="100%" style="height:85vh; border:1px solid #ddd; border-radius:8px;" title="2026년 개정안 전문"></iframe>
-    <p style="margin-top:10px; font-size:0.82rem; color:#888;">※ PDF가 표시되지 않으면 <a href="https://bkstar06-ai.github.io/posan-survey/regulation.pdf" target="_blank" style="color:var(--primary);">여기를 클릭하여 다운로드</a>하세요.</p>
+    <div style="text-align:center; padding:30px 0 20px;">
+      <a href="https://bkstar06-ai.github.io/posan-survey/regulation.pdf" target="_blank"
+         style="display:inline-block; background:var(--primary); color:white; padding:16px 36px; border-radius:10px; font-size:1.05rem; font-weight:700; text-decoration:none; margin-bottom:16px;">
+        📄 새 탭에서 전문 보기
+      </a>
+      <br>
+      <a href="https://bkstar06-ai.github.io/posan-survey/regulation.pdf" download
+         style="display:inline-block; background:#f0ede6; color:var(--primary); padding:12px 28px; border-radius:10px; font-size:0.95rem; font-weight:600; text-decoration:none;">
+        ⬇️ PDF 다운로드
+      </a>
+      <p style="margin-top:18px; font-size:0.82rem; color:#999;">모바일에서는 '새 탭에서 전문 보기'를 이용해 주세요.</p>
+    </div>
+    <iframe src="regulation.pdf#view=FitH" width="100%" style="height:82vh; border:1px solid #ddd; border-radius:8px;" title="2026년 개정안 전문"></iframe>
   </div>
 </div>
 
@@ -1603,15 +1614,4 @@ function renderDashboard() {
   const roleNames = {student:'학생',parent:'학부모',teacher:'교직원'};
   document.getElementById('comments-list').innerHTML = comments.length === 0
     ? '<p style="color:var(--text-muted);font-size:0.9rem;">의견 없음</p>'
-    : comments.map(d => `<div style="border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:12px;"><div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:6px;">[${roleNames[d.role]||d.role}] ${new Date(d.timestamp).toLocaleString('ko-KR')} · 전체의견: ${d.overall==='agree'?'✅ 동의':'❌ 반대'}</div><div style="font-size:0.9rem;line-height:1.7;">${d.comments.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div></div>`).join('');
-}
-
-function clearData() {
-  if (confirm('모든 응답 데이터를 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.')) {
-    localStorage.removeItem(STORAGE_KEY); renderDashboard();
-  }
-}
-updateProgress();
-</script>
-</body>
-</html>
+    : comments.map(d => `<div style="border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:12px;"><div style="font-size:0.8rem;col
