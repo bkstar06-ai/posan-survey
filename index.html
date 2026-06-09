@@ -86,6 +86,8 @@
     border-bottom: 3px solid transparent;
     transition: all 0.2s;
     letter-spacing: 0.02em;
+    -webkit-user-select: none;
+    user-select: none;
   }
   .tab-btn:hover { color: rgba(255,255,255,0.9); }
   .tab-btn.active {
@@ -646,9 +648,9 @@
     <div class="header-badge">2026 개정안</div>
   </div>
   <div class="tab-nav" id="tab-nav">
-    <button class="tab-btn active" id="btn-survey" type="button">📋 설문 참여</button>
-    <button class="tab-btn" id="btn-fulltext" type="button">📄 2026년 개정안 전문</button>
-    <button class="tab-btn" id="btn-admin" type="button">🔐 관리자 대시보드</button>
+    <button class="tab-btn active" id="btn-survey" type="button" onclick="showTab('survey')">설문 참여</button>
+    <button class="tab-btn" id="btn-fulltext" type="button" onclick="showTab('fulltext')">2026년 개정안 전문</button>
+    <button class="tab-btn" id="btn-admin" type="button" onclick="showTab('admin')">관리자 대시보드</button>
   </div>
 </header>
 
@@ -1442,12 +1444,4 @@
       </div>
       <div style="margin-top: 20px;">
         <button class="btn-refresh" onclick="renderDashboard()">🔄 새로고침</button>
-        <button class="btn-clear" onclick="clearData()">🗑️ 전체 데이터 삭제</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script src="survey.js"></script>
-</body>
-</html>
+        <button class="btn-clear" onclic
