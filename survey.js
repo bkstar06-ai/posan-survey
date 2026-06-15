@@ -60,9 +60,11 @@ function submitSurvey() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(existing));
 
   // Google Sheets 전송
-  var SHEET_URL = 'https://script.google.com/macros/s/AKfycbw6u1emnKWKp0_VY_9Obz2QYp3miwLy66qrrLzZ_NprOy5z-CzxZcTfN7kxnKrOWpS7Vw/exec';
+  var SHEET_URL = 'https://script.google.com/macros/s/AKfycby4fyGiSPaby7Hmc9k3csiB4xBCH5Y-1VU3c3l7iGI5nI7iShgUDjQ4HVH04oQwI1aFhg/exec';
   fetch(SHEET_URL, {
     method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'text/plain' },
     body: JSON.stringify(entry)
   }).catch(function(err) { console.log('전송 오류:', err); });
 
